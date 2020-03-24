@@ -7,7 +7,7 @@ int main(void)
     int n;
     do
     {
-        n = get_int("Size: /n");
+        n = get_int("Size:");
     }
     while (n < 1 || n > 8);
     //Row iternation
