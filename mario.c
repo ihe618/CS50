@@ -22,7 +22,7 @@ int main(void)
         {
             printf("#");
         }
-        printf(" ");
+        printf("  ");
         //Right side
         for (int k = 1; k <= i; k++)
         {
