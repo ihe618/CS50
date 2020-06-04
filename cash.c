@@ -12,8 +12,6 @@ int main(void)
   while (number<0);                                 //get positive number
  int cents = round(number*100);                     //define and convert to cents
 
-    cents = cents%100;                               //eliminate dollar bills
-
  int counter = 0;                                   //define counter
 
 //add number of quarters
