@@ -34,44 +34,40 @@ long n = get_long("Number: ");                      //Define number
     sumo = sumo + digit(n, i);  
     }
     int final = sume + sumo;
-//If fail Luhn's algorithm
-        if(final % 10)                                
+//If failed Luhn's algorithm
+    if(final%10)
         {
-        printf("INVALID\n"); 
+            printf("INVALID\n");
         }
 //If pass Luhn's algorithm       
-        else if(final % 10 == 0)
+       else
         {
-            //American Express
-            long Am = (n - n % ten(13))/ten(13);
+            long Am = (n - n % ten(13))/ten(13);        //American Express- first 2 digits
+            long MC = (n - n%ten(14))/ten(14);          //Mastercard- first 2 digits
+            long Vi = (n - n % ten(12))/ten(12);        //Visa 13 digits- first digit
+            long Vis = (n - n % ten(15))/ten(15);       //Visa 16 digits- first digit
+           //Amex
             if ((Am == 34) || (Am == 37))
                 {
                 printf("AMEX\n");
                 }
             //Mastercard
-            long MC = (n - n%ten(14))/ten(14);
-            if ( (50 < MC) && (MC < 56))
+            else if ( (50 < MC) && (MC < 56))
                 {
                 printf("MASTERCARD\n");
                 }
             //Visa
-            long Vi = (n - n % ten(12))/ten(12);
-            long Vis = (n - n % ten(15))/ten(15);
-            if((Vi == 4) || (Vis == 4))
+            else if((Vi == 4) || (Vis == 4))
                 {
                 printf("VISA\n");
                 }
-        }
-        else
-        {
-        printf("INVALID\n");
-        }
-        
+            else                          
+                {
+                printf("INVALID\n"); 
+                }
+        }  
     }
-    
 }
-
-
 //Create function for powers of 10
 long ten(int p)                                    
 {  
