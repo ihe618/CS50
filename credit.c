@@ -2,16 +2,15 @@
 #include <stdio.h>
 #include <math.h>
 
-long ten(int p);
-int digit(long x, int y);
-
+long ten(int p);                                           //Powers of 10
+int digit(long x, int y);                                  //Extracting digits
 
 int main(void)
 { 
 
-    long n = get_long("Number: ");                          //Define number
+    long n = get_long("Number: ");                          //Get number
 
-//Eliminate negative and <13 or > 16 digit no.s      
+//Eliminate negatives and <13 or > 16 digit numbers     
     if (n < ten(13) || n >= ten(17))
     {
         printf("INVALID\n");                                   
@@ -43,10 +42,10 @@ int main(void)
 //If passed Luhn's algorithm       
         else
         {
-            long Am = (n - n % ten(13)) / ten(13);          //American Express- first 2 digits
-            long MC = (n - n % ten(14)) / ten(14);          //Mastercard- first 2 digits
-            long Vi = (n - n % ten(12)) / ten(12);            //Visa 13 digits- first digit
-            long Vis = (n - n % ten(15)) / ten(15);           //Visa 16 digits- first digit
+            long Am = (n - n % ten(13)) / ten(13);           //American Express- first 2 digits
+            long MC = (n - n % ten(14)) / ten(14);           //Mastercard- first 2 digits
+            long Vi = (n - n % ten(12)) / ten(12);           //Visa 13 digits- first digit
+            long Vis = (n - n % ten(15)) / ten(15);          //Visa 16 digits- first digit
             //Amex
             if ((Am == 34) || (Am == 37))   
             {
@@ -81,7 +80,7 @@ long ten(int p)
     return result;
 } 
 
-//Create function to spit out digit
+//Create function to spit out digits
 int digit(long x, int y)                            
 {
     int answer;
