@@ -8,10 +8,10 @@ int digit(long x, int y);
 
 int main(void)
 { 
-long n = get_long("Number: ");                      //Define number
+long n = get_long("Number: ");                          //Define number
 
 //Eliminate negative and <13 or > 16 digit no.s      
-    if (n < 100000000000 || n > 9999999999999999)
+    if (n < ten(13) || n >= ten(17))
     {
         printf("INVALID\n");                                   
     }
@@ -22,7 +22,7 @@ long n = get_long("Number: ");                      //Define number
     int sume = 0;                           
     for(int i=2; i<17; i = i+2)                        //Repeat for even digits from second to last 
     {
-    int twotimes = 2*(digit(n, i));                     //multiple digit by 2
+    int twotimes = 2*(digit(n, i));                     //multiply digit by 2
     int d = twotimes % 10;                              //determine single digit for the product
     int t = (twotimes - d)/10;                          //determine tenth digit for the product    
     sume = sume + d + t;                                //add single and tenth digits of product   
