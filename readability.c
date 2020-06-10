@@ -8,7 +8,7 @@ int main(void)
 
     //Define word count
     int wc = 1;
-    for (int i = 0; i < strlen(text); i++)
+    for (int i = 0; text[i] != '\0'; i++)
     {
         if (text[i] == ' ' && text[i + 1] != ' ')
         {
