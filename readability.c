@@ -32,9 +32,17 @@ int main(void)
         }
     }
     float S = s * 100 / wc;                                 //Calculate number of sentences per 100 wc
+    float index = 0.0588 * L - 0.296 * S - 15.8;            //Calculate Coleman-Liau index
 
-
-    float index = 0.0588 * L - 0.296 * S - 15.8;            //calculate Coleman-Liau indexx
+    if (index < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (index >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
     printf("Grade %.0f\n", index);
 
 }
