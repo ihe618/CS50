@@ -38,7 +38,7 @@ int main(int argc, string argv[])
         {
             printf("%c", ((int)t[i] - 96 + k) % 26 + 96);
         }
-        else                                                            //otherwise, text remain same
+        else                                                            //otherwise, text remains same
         {
             printf("%c", t[i]);
         }
