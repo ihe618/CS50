@@ -44,36 +44,36 @@ int main(int argc, string argv[])
     {
         for (int j = 0; j < i; j++)                             //for each ith character, compare with all previous characters for dup
         {
-              if (argv[1][i] == argv[1][j])
-              {
-                  r++;
-              }
+            if (argv[1][i] == argv[1][j])
+            {
+                r++;
+            }
         }
     }
     if (r > 0)
     {
-        printf("Usage: ./substitution key repeat letters %i\n", r);
+        printf("Usage: ./substitution key", r);
         return 1;
     }
 
     //assuming command-line arguments correct
-    string t = get_string ("plaintext: ");                      //prompt for plaintext
-    printf ("ciphertext: ");
+    string t = get_string("plaintext: ");                       //prompt for plaintext
+    printf("ciphertext: ");
     int m = strlen(t);
     for (int i = 0; i < m; i++)
     {
         if ((int)t[i] > 96 && (int)t[i] < 123)                  //if plaintext digit i is lowercase letter
-          {
-                printf("%c", tolower(argv[1][(int)t[i] - 97]));
-          }
-          else if ((int)t[i] > 64 && (int)t[i] < 91)            //if plaintext digit i is uppercase letter
-          {
-                printf("%c", toupper(argv[1][(int)t[i] - 65]));
-          }
-          else                                                  //otherwise, if plaintext digit is not letter
-          {
-                printf("%c", t[i]);
-          }
+        {
+            printf("%c", tolower(argv[1][(int)t[i] - 97]));
+        }
+        else if ((int)t[i] > 64 && (int)t[i] < 91)              //if plaintext digit i is uppercase letter
+        {
+            printf("%c", toupper(argv[1][(int)t[i] - 65]));
+        }
+        else                                                    //otherwise, if plaintext digit is not letter
+        {
+            printf("%c", t[i]);
+        }
     }
     printf("\n");
     return 0;
