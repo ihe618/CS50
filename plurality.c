@@ -81,7 +81,7 @@ bool vote(string name)
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // define new term plr as larges vote count
+    // define new term plr as largest vote count
     int plr = 0;
     for (int i = 0; i < candidate_count; i++)           // for all candidates
     {
