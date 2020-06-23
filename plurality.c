@@ -85,14 +85,14 @@ void print_winner(void)
     int plr = 0;
     for (int i = 0; i < candidate_count; i++)           // for all candidates
     {
-        if (plr < candidates[i].votes)                  // if candidate's vote count is greater than plr, then reset value of plr to that candidate's count
+        if (plr < candidates[i].votes)                  // if plr is less than a candidate's vote count, then reset value of plr to that candidate's vote count
         {
             plr = candidates[i].votes;                  // after loop, plr should equal to greatest candidate vote count
         }
     }
-    for (int i = 0; i < candidate_count; i++)           // if candidate's vote count = plr count, then print candidate's name
+    for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes == plr)
+        if (candidates[i].votes == plr)                 // if candidate's vote count = plr count, then print candidate's name
         {
             printf("%s\n", candidates[i].name);
         }
