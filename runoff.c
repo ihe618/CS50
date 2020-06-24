@@ -164,7 +164,7 @@ void tabulate(void)
                 {
                     if (strcmp(candidates[preferences[j][n]].name, candidates[i].name) == 0)
                     {
-                    candidates[preferences[j][c]].votes++;
+                        candidates[preferences[j][c]].votes++;
                     }
                 }
             }
