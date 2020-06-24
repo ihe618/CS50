@@ -79,7 +79,6 @@ int main(int argc, string argv[])
                 return 4;
             }
         }
-
         printf("\n");
     }
 
@@ -156,15 +155,15 @@ void tabulate(void)
         }
         else if (candidates[i].eliminated == true)          // if there are eliminated candidates
         {
-            int c = 0;                                      // set counter for each candidate that has been eliminated
-            c++;
+            int c = 0;
+            c++;                                             // count number of candidates that have been eliminated
             for (int j = 0; j < voter_count; j++)           // for each voter j
             {
-                for (int n = 0; n < c; n++)                 // check if rank 0 to less than c have been eliminated
+                for (int n = 0; n < c; n++)                 // look at the first few ranks equal to number of eliminated candidates
                 {
-                    if (strcmp(candidates[preferences[j][n]].name, candidates[i].name) == 0)
+                    if (strcmp(candidates[preferences[j][n]].name, candidates[i].name) == 0) // if one of those ranks equal to an eliminated candidate
                     {
-                        candidates[preferences[j][n + 1]].votes++;  // if so, count vote from 1 rank higher
+                        candidates[preferences[j][n + 1]].votes++;  // count vote from 1 rank higher
                     }
                 }
             }
