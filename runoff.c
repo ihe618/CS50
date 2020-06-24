@@ -128,11 +128,11 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    for (int k = 0; k < candidate_count; k++)
+    for (int k = 0; k < candidate_count; k++)               // for all candidates, where there is a name match
     {
-        if (strcmp(candidates[k].name, name) == 0)              // if there is a name match, record preferences by voter and rank
+        if (strcmp(candidates[k].name, name) == 0)
         {
-            preferences[voter][rank] = k;
+            preferences[voter][rank] = k;                   // set preferences[voter][rank] = candidate k
             return true;
         }
     }
@@ -144,27 +144,27 @@ void tabulate(void)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        int c = 0;
-        if (candidates[i].eliminated == false)
+        if (candidates[i].eliminated == false)              // if there are no eliminated candidates
         {
             for (int j = 0; j < voter_count; j++)
             {
                 if (strcmp(candidates[preferences[j][0]].name, candidates[i].name) == 0)
                 {
-                    candidates[i].votes++;
+                    candidates[i].votes++;                  // count votes of all voters in preference [j][0]
                 }
             }
         }
-        else if (candidates[i].eliminated == true)
+        else if (candidates[i].eliminated == true)          // if there are eliminated candidates
         {
+            int c = 0;                                      // set counter for each candidate that has been eliminated
             c++;
-            for (int j = 0; j < voter_count; j++)
+            for (int j = 0; j < voter_count; j++)           // for each voter j
             {
-                for (int n = 0; n < c; n++)
+                for (int n = 0; n < c; n++)                 // check if rank 0 to less than c have been eliminated
                 {
                     if (strcmp(candidates[preferences[j][n]].name, candidates[i].name) == 0)
                     {
-                        candidates[preferences[j][c]].votes++;
+                        candidates[preferences[j][n + 1]].votes++;  // if so, count vote from 1 rank higher
                     }
                 }
             }
@@ -206,23 +206,23 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-    int j = 0;    //define number of uneliminated candidates with min votes
-    int l = 0;
+    int j = 0;                                              // define number of uneliminated candidates with min votes
+    int l = 0;                                              // count number of eliminated candidates
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min & candidates[i].eliminated == false)
         {
-            j++;
+            j++;                                            // if uneliminated candidate has min vote, add to defined j
         }
-        if (candidates[i].eliminated == true)
+        if (candidates[i].eliminated == true)               // if candidate has been eliminated, add to defined l
         {
             l++;
         }
     }
-    if (j == candidate_count - l)
+    if (j == candidate_count -
+        l)                                                  // if number of uneliminated candidates w min vote = number of remaining candidates
     {
-        return true;
+        return true;                                        // return tie
     }
     return false;
 }
@@ -230,12 +230,11 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    // TODO
-    for (int i = 0; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)               // if candidate has least votes and there is no tie
     {
         if (candidates[i].votes == min & is_tie(min) == false)
         {
-            candidates[i].eliminated = true;
+            candidates[i].eliminated = true;                // candidate is eliminated
         }
     }
     return;
