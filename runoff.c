@@ -149,7 +149,7 @@ void tabulate(void)
         {
             for (int j = 0; j < voter_count; j++)
             {
-                if (strcmp(candidates[preferences[j][c]].name, candidates[i].name) == 0)
+                if (strcmp(candidates[preferences[j][0]].name, candidates[i].name) == 0)
                 {
                     candidates[i].votes++;
                 }
@@ -160,9 +160,12 @@ void tabulate(void)
             c++;
             for (int j = 0; j < voter_count; j++)
             {
-                if (strcmp(candidates[preferences[j][0]].name, candidates[i].name) == 0)
+                for (int n = 0; n < c; n++)
                 {
+                    if (strcmp(candidates[preferences[j][n]].name, candidates[i].name) == 0)
+                    {
                     candidates[preferences[j][c]].votes++;
+                    }
                 }
             }
         }
