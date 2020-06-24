@@ -207,15 +207,20 @@ int find_min(void)
 bool is_tie(int min)
 {
     // TODO
-    int j = 0;                                      //define number of uneliminated candidates with min votes
+    int j = 0;    //define number of uneliminated candidates with min votes
+    int l = 0;
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].votes == min)
+        if (candidates[i].votes == min & candidates[i].eliminated == false)
         {
             j++;
         }
+        if (candidates[i].eliminated == true)
+        {
+            l++;
+        }
     }
-    if (j == candidate_count)
+    if (j == candidate_count - l)
     {
         return true;
     }
