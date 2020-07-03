@@ -11,11 +11,10 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         {
             // So long RGB values equal- shades of gray
             // Calculate averages of each pixel, and set the RGB to average
-            float avg = (image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue) / 3;
-            int final = round(avg);
-            image[i][j].rgbtRed = final;
-            image[i][j].rgbtGreen = final;
-            image[i][j].rgbtBlue = final;
+            int avg = round((image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue) / 3.000);
+            image[i][j].rgbtRed = avg;
+            image[i][j].rgbtGreen = avg;
+            image[i][j].rgbtBlue = avg;
         }
     }
     return;
@@ -122,9 +121,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     Blue = Blue + image[a][b].rgbtBlue;
                 }
             }
-            image[i][j].rgbtRed = round(Red / 9);
-            image[i][j].rgbtGreen = round(Green / 9);
-            image[i][j].rgbtBlue = round(Blue / 9);
+            image[i][j].rgbtRed = round(Red / 9.000);
+            image[i][j].rgbtGreen = round(Green / 9.000);
+            image[i][j].rgbtBlue = round(Blue / 9.000);
         }
     }
 
@@ -144,9 +143,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[a][b].rgbtBlue;
             }
         }
-        image[0][i].rgbtRed = round(Red / 6);               // Average of adjacent values for each color
-        image[0][i].rgbtGreen = round(Green / 6);
-        image[0][i].rgbtBlue = round(Blue / 6);
+        image[0][i].rgbtRed = round(Red / 6.000);               // Average of adjacent values for each color
+        image[0][i].rgbtGreen = round(Green / 6.000);
+        image[0][i].rgbtBlue = round(Blue / 6.000);
     }
     // Row height - 1 (bottom row)
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
@@ -163,9 +162,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[a][b].rgbtBlue;
             }
         }
-        image[height - 1][i].rgbtRed = round(Red / 6);      // Average of adjacent values for each color
-        image[height - 1][i].rgbtGreen = round(Green / 6);
-        image[height - 1][i].rgbtBlue = round(Blue / 6);
+        image[height - 1][i].rgbtRed = round(Red / 6.000);      // Average of adjacent values for each color
+        image[height - 1][i].rgbtGreen = round(Green / 6.000);
+        image[height - 1][i].rgbtBlue = round(Blue / 6.000);
     }
     // Column 0
     for (int i = 1; i < height - 1; i++)                    // For rows 1 to height - 1
@@ -182,9 +181,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[b][a].rgbtBlue;
             }
         }
-        image[i][0].rgbtRed = round(Red / 6);               // Average of adjacent values for each color
-        image[i][0].rgbtGreen = round(Green / 6);
-        image[i][0].rgbtBlue = round(Blue / 6);
+        image[i][0].rgbtRed = round(Red / 6.000);               // Average of adjacent values for each color
+        image[i][0].rgbtGreen = round(Green / 6.000);
+        image[i][0].rgbtBlue = round(Blue / 6.000);
     }
     // Column width - 1 (right most column)
     for (int i = 1; i < height - 1; i++)                    // For rows 1 to height - 1
@@ -201,9 +200,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[b][a].rgbtBlue;
             }
         }
-        image[i][width - 1].rgbtRed = round(Red / 6);       // Average of adjacent values for each color
-        image[i][width - 1].rgbtGreen = round(Green / 6);
-        image[i][width - 1].rgbtBlue = round(Blue / 6);
+        image[i][width - 1].rgbtRed = round(Red / 6.000);       // Average of adjacent values for each color
+        image[i][width - 1].rgbtGreen = round(Green / 6.000);
+        image[i][width - 1].rgbtBlue = round(Blue / 6.000);
     }
 
     // CORNER PIECES
@@ -220,9 +219,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             Blue = Blue + image[a][b].rgbtBlue;
         }
     }
-    image[0][0].rgbtRed = round(Red / 4);                   // Average of adjacent values for each color
-    image[0][0].rgbtGreen = round(Green / 4);
-    image[0][0].rgbtBlue = round(Blue / 4);
+    image[0][0].rgbtRed = round(Red / 4.000);                   // Average of adjacent values for each color
+    image[0][0].rgbtGreen = round(Green / 4.000);
+    image[0][0].rgbtBlue = round(Blue / 4.000);
 
 
     // Image[height-1][0]- bottom left corner
@@ -238,9 +237,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             Blue = Blue + image[a][b].rgbtBlue;
         }
     }
-    image[height - 1][0].rgbtRed = round(Red / 4);          // Average of adjacent values for each color
-    image[height - 1][0].rgbtGreen = round(Green / 4);
-    image[height - 1][0].rgbtBlue = round(Blue / 4);
+    image[height - 1][0].rgbtRed = round(Red / 4.000);          // Average of adjacent values for each color
+    image[height - 1][0].rgbtGreen = round(Green / 4.000);
+    image[height - 1][0].rgbtBlue = round(Blue / 4.000);
 
     // Image[0][width-1] - top right corner corner
     Red = 0;
@@ -255,9 +254,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             Blue = Blue + image[a][b].rgbtBlue;
         }
     }
-    image[0][width - 1].rgbtRed = round(Red / 4);           // Average of adjacent values for each color
-    image[0][width - 1].rgbtGreen = round(Green / 4);
-    image[0][width - 1].rgbtBlue = round(Blue / 4);
+    image[0][width - 1].rgbtRed = round(Red / 4.000);           // Average of adjacent values for each color
+    image[0][width - 1].rgbtGreen = round(Green / 4.000);
+    image[0][width - 1].rgbtBlue = round(Blue / 4.000);
 
     // Image[height-1][width-1] - bottom right
     Red = 0;
@@ -272,9 +271,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             Blue = Blue + image[a][b].rgbtBlue;
         }
     }
-    image[height - 1][width - 1].rgbtRed = round(Red / 4);  // Average of adjacent values for each color
-    image[height - 1][width - 1].rgbtGreen = round(Green / 4);
-    image[height - 1][width - 1].rgbtBlue = round(Blue / 4);
+    image[height - 1][width - 1].rgbtRed = round(Red / 4.000);  // Average of adjacent values for each color
+    image[height - 1][width - 1].rgbtGreen = round(Green / 4.000);
+    image[height - 1][width - 1].rgbtBlue = round(Blue / 4.000);
 
     return;
 }
