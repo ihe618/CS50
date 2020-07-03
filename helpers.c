@@ -131,10 +131,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     // Row 0
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
     {
-        float Red = 0;
-        float Green = 0;
-        float Blue = 0;
-        for (int a = 0; a < 2; a++)                         // Row 0 and 1
+        float Red = 0.00;
+        float Green = 0.00;
+        float Blue = 0.00;
+        for (int a = 0.00; a < 2; a++)                         // Row 0 and 1
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent columns
             {
