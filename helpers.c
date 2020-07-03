@@ -11,7 +11,7 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
         {
             // So long RGB values equal- shades of gray
             // Calculate averages of each pixel, and set the RGB to average
-            int avg = round((image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue) / 3.000);
+            int avg = round((image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue) / 3.00);
             image[i][j].rgbtRed = avg;
             image[i][j].rgbtGreen = avg;
             image[i][j].rgbtBlue = avg;
@@ -121,9 +121,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     Blue = Blue + image[a][b].rgbtBlue;
                 }
             }
-            image[i][j].rgbtRed = round(Red / 9.000);
-            image[i][j].rgbtGreen = round(Green / 9.000);
-            image[i][j].rgbtBlue = round(Blue / 9.000);
+            int BR = round(Red / 9.00);
+            int BG = round(Green / 9.00);
+            int BB = round(Blue / 9.00);
+            image[i][j].rgbtRed = BR;
+            image[i][j].rgbtGreen = BG;
+            image[i][j].rgbtBlue = BB;
         }
     }
 
@@ -131,10 +134,10 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     // Row 0
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
     {
-        float Red = 0.00;
-        float Green = 0.00;
-        float Blue = 0.00;
-        for (int a = 0.00; a < 2; a++)                         // Row 0 and 1
+        int Red = 0;
+        int Green = 0;
+        int Blue = 0;
+        for (int a = 0; a < 2; a++)                         // Row 0 and 1
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent columns
             {
@@ -143,9 +146,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[a][b].rgbtBlue;
             }
         }
-        image[0][i].rgbtRed = round(Red / 6.000);               // Average of adjacent values for each color
-        image[0][i].rgbtGreen = round(Green / 6.000);
-        image[0][i].rgbtBlue = round(Blue / 6.000);
+        int BR = round(Red / 6.00);
+        int BG = round(Green / 6.00);
+        int BB = round(Blue / 6.00);
+
+        image[0][i].rgbtRed = BR;              // Average of adjacent values for each color
+        image[0][i].rgbtGreen = BG;
+        image[0][i].rgbtBlue = BB;
     }
     // Row height - 1 (bottom row)
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
