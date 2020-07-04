@@ -104,6 +104,23 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
 
+    // Create addresses temporarily to store old values
+    int *tempRed[height][width];
+    int *tempGreen[height][width];
+    int *tempBlue[height][width];
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            tempRed[i][j] = malloc(sizeof(BYTE));
+            tempGreen[i][j] = malloc(sizeof(BYTE));
+            tempBlue[i][j] = malloc(sizeof(BYTE));
+            *tempRed[i][j] = image[i][j].rgbtRed;
+            *tempGreen[i][j] = image[i][j].rgbtGreen;
+            *tempBlue[i][j] = image[i][j].rgbtBlue;
+        }
+    }
+
     // NON-EDGE CASES
     for (int i = 1; i < height - 1; i++)                    // Rows
     {
@@ -116,14 +133,11 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             {
                 for (int b = j - 1; b <= j + 1; b++)
                 {
-                    Red = Red + image[a][b].rgbtRed;
-                    Green = Green + image[a][b].rgbtGreen;
-                    Blue = Blue + image[a][b].rgbtBlue;
+                    Red = Red + *tempRed[a][b];
+                    Green = Green + *tempGreen[a][b];
+                    Blue = Blue + *tempBlue[a][b];
                 }
             }
-            Red = round(Red / 9.000);
-            Green = round(Green / 9.000);
-            Blue = round(Blue / 9.000);
             image[i][j].rgbtRed = Red;
             image[i][j].rgbtGreen = Green;
             image[i][j].rgbtBlue = Blue;
@@ -141,18 +155,14 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent columns
             {
-                Red = Red + image[a][b].rgbtRed;            // Sum of adjacent column values in adjacent rows
-                Green = Green + image[a][b].rgbtGreen;
-                Blue = Blue + image[a][b].rgbtBlue;
+                Red = Red + *tempRed[a][b];            // Sum of adjacent column values in adjacent rows
+                Green = Green + *tempGreen[a][b];
+                Blue = Blue + *tempBlue[a][b];
             }
         }
-        Red = round(Red / 6.000);
-        Green = round(Green / 6.000);
-        Blue = round(Blue / 6.000);
-
-        image[0][i].rgbtRed = Red;              // Average of adjacent values for each color
-        image[0][i].rgbtGreen = Green;
-        image[0][i].rgbtBlue = Blue;
+        image[0][i].rgbtRed = round(Red / 6.000);              // Average of adjacent values for each color
+        image[0][i].rgbtGreen = round(Green / 6.000);
+        image[0][i].rgbtBlue = round(Blue / 6.000);
     }
     // Row height - 1 (bottom row)
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
@@ -164,9 +174,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent columns
             {
-                Red = Red + image[a][b].rgbtRed;            // Sum of adjacent column values in adjacent rows
-                Green = Green + image[a][b].rgbtGreen;
-                Blue = Blue + image[a][b].rgbtBlue;
+                Red = Red + *tempRed[a][b];            // Sum of adjacent column values in adjacent rows
+                Green = Green + *tempGreen[a][b];
+                Blue = Blue + *tempBlue[a][b];
             }
         }
         image[height - 1][i].rgbtRed = round(Red / 6.000);      // Average of adjacent values for each color
@@ -183,9 +193,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent rows
             {
-                Red = Red + image[b][a].rgbtRed;            // Sum of adjacent column values in adjacent rows
-                Green = Green + image[b][a].rgbtGreen;
-                Blue = Blue + image[b][a].rgbtBlue;
+                Red = Red + *tempRed[b][a];            // Sum of adjacent column values in adjacent rows
+                Green = Green + *tempGreen[b][a];
+                Blue = Blue + *tempBlue[b][a];
             }
         }
         image[i][0].rgbtRed = round(Red / 6.000);               // Average of adjacent values for each color
@@ -202,9 +212,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         {
             for (int b = i - 1; b <= i + 1; b++)            // Adjacent rows
             {
-                Red = Red + image[b][a].rgbtRed;            // Sum of adjacent column values in adjacent rows
-                Green = Green + image[b][a].rgbtGreen;
-                Blue = Blue + image[b][a].rgbtBlue;
+                Red = Red + *tempRed[b][a];            // Sum of adjacent column values in adjacent rows
+                Green = Green + *tempGreen[b][a];
+                Blue = Blue + *tempBlue[b][a];
             }
         }
         image[i][width - 1].rgbtRed = round(Red / 6.000);       // Average of adjacent values for each color
@@ -221,9 +231,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int b = 0; b < 2; b++)
         {
-            Red = Red + image[a][b].rgbtRed;
-            Green = Green + image[a][b].rgbtGreen;
-            Blue = Blue + image[a][b].rgbtBlue;
+            Red = Red + *tempRed[a][b];
+            Green = Green + *tempGreen[a][b];
+            Blue = Blue + *tempBlue[a][b];
         }
     }
     image[0][0].rgbtRed = round(Red / 4.000);                   // Average of adjacent values for each color
@@ -239,9 +249,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int b = 0; b < 2; b++)                         // First 2 columns
         {
-            Red = Red + image[a][b].rgbtRed;
-            Green = Green + image[a][b].rgbtGreen;
-            Blue = Blue + image[a][b].rgbtBlue;
+            Red = Red + *tempRed[a][b];
+            Green = Green + *tempGreen[a][b];
+            Blue = Blue + *tempBlue[a][b];
         }
     }
     image[height - 1][0].rgbtRed = round(Red / 4.000);          // Average of adjacent values for each color
@@ -256,9 +266,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int b = width - 2; b < width; b++)             // Right most 2 columns
         {
-            Red = Red + image[a][b].rgbtRed;
-            Green = Green + image[a][b].rgbtGreen;
-            Blue = Blue + image[a][b].rgbtBlue;
+            Red = Red + *tempRed[a][b];
+            Green = Green + *tempGreen[a][b];
+            Blue = Blue + *tempBlue[a][b];
         }
     }
     image[0][width - 1].rgbtRed = round(Red / 4.000);           // Average of adjacent values for each color
@@ -273,14 +283,24 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int b = width - 2; b < width; b++)             // Right most 2 columns
         {
-            Red = Red + image[a][b].rgbtRed;
-            Green = Green + image[a][b].rgbtGreen;
-            Blue = Blue + image[a][b].rgbtBlue;
+            Red = Red + *tempRed[a][b];
+            Green = Green + *tempGreen[a][b];
+            Blue = Blue + *tempBlue[a][b];
         }
     }
     image[height - 1][width - 1].rgbtRed = round(Red / 4.000);  // Average of adjacent values for each color
     image[height - 1][width - 1].rgbtGreen = round(Green / 4.000);
     image[height - 1][width - 1].rgbtBlue = round(Blue / 4.000);
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            free(tempRed[i][j]);
+            free(tempGreen[i][j]);
+            free(tempBlue[i][j]);
+        }
+    }
 
     return;
 }
