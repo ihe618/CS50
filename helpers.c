@@ -121,12 +121,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                     Blue = Blue + image[a][b].rgbtBlue;
                 }
             }
-            int BR = round(Red / 9.000);
-            int BG = round(Green / 9.000);
-            int BB = round(Blue / 9.000);
-            image[i][j].rgbtRed = BR;
-            image[i][j].rgbtGreen = BG;
-            image[i][j].rgbtBlue = BB;
+            Red = round(Red / 9.000);
+            Green = round(Green / 9.000);
+            Blue = round(Blue / 9.000);
+            image[i][j].rgbtRed = Red;
+            image[i][j].rgbtGreen = Green;
+            image[i][j].rgbtBlue = Blue;
         }
     }
 
@@ -146,13 +146,13 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 Blue = Blue + image[a][b].rgbtBlue;
             }
         }
-        int BR = round(Red / 6.000);
-        int BG = round(Green / 6.000);
-        int BB = round(Blue / 6.000);
+        Red = round(Red / 6.000);
+        Green = round(Green / 6.000);
+        Blue = round(Blue / 6.000);
 
-        image[0][i].rgbtRed = BR;              // Average of adjacent values for each color
-        image[0][i].rgbtGreen = BG;
-        image[0][i].rgbtBlue = BB;
+        image[0][i].rgbtRed = Red;              // Average of adjacent values for each color
+        image[0][i].rgbtGreen = Green;
+        image[0][i].rgbtBlue = Blue;
     }
     // Row height - 1 (bottom row)
     for (int i = 1; i < width - 1; i++)                     // For columns 1 to width - 1
