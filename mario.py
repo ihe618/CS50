@@ -7,11 +7,8 @@ while True:
     if 0 < n < 9:
         break
 
-print(n)
-
-
 for i in range(n):                                              #for each row n rows
-    for j in range(n-i):
+    for j in range(n-1-i):
         print(" ", end="")
     for j in range(i+1):                                        #for number of times as row number, print j times followed by 2 spaces
         print("#", end="")
