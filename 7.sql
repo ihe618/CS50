@@ -1,1 +1,4 @@
-SELECT name FROM people WHERE id IN (SELECT person_id FROM stars WHERE movie_id IN (SELECT id FROM movies WHERE title LIKE "Toy Story") );
+SELECT title, rating FROM movies
+    JOIN ratings ON movies.id = ratings.movie_id
+    WHERE year = 2010 AND rating NOT NULL
+    GROUP BY title ORDER BY rating DESC, title;
